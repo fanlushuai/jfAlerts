@@ -1,6 +1,5 @@
 const { AutojsUtil } = require("./autojsUtil.js");
 const { Config } = require("./config.js");
-const { DailyStorage } = require("./dailyStorage");
 const { SelfService } = require("./selfService.js");
 const { WeiXin } = require("./weixin");
 
@@ -26,9 +25,8 @@ const Robot = {
     while (1) {
       log("开始任务");
       Robot.currentAccount = WeiXin.wo();
-      DailyStorage.currentAccount = Robot.currentAccount;
 
-      log("当前微信账号 %s", DailyStorage.currentAccount);
+      log("当前微信账号 %s", Robot.currentAccount);
 
 
       log("进入自助服务")

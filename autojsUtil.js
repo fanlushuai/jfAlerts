@@ -1,4 +1,3 @@
-const { DailyStorage } = require("./dailyStorage");
 const { pushplus } = require("./msgPush");
 const { Robot } = require("./robot");
 const { Smms } = require("./smms");
@@ -289,13 +288,11 @@ const AutojsUtil = {
         ).findOne(3000)
       ) {
         log("发现需要人工接入界面");
-        // pushplus.push("已退出脚本", "请马上手动验证账号 " + DailyStorage.currentAccount);
         pushplus.pushFailCapture(
           "已退出脚本",
           targetName +
           " 查找失败!" +
           "请马上手动验证账号 " +
-          DailyStorage.currentAccount,
           picUrl
         );
         log("脚本退出");
@@ -306,7 +303,6 @@ const AutojsUtil = {
           targetName +
           " 查找失败!" +
           "非预期元素 " +
-          DailyStorage.currentAccount,
           picUrl
         );
       }
