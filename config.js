@@ -1,3 +1,5 @@
+const configFilePath="/storage/emulated/0/JFAlert/config.json"
+
 const Config = {
   deviceId: "",
   pushToken: "",
@@ -7,7 +9,7 @@ const Config = {
     if (json == null) {
       return;
     }
-    let path = "/storage/emulated/0/mtz/config.json";
+    let path = configFilePath;
     if (!files.exists(path)) {
       log("创建配置文件");
       files.createWithDirs(path);
@@ -31,7 +33,7 @@ const Config = {
     }
   },
   read: function () {
-    let path = "/storage/emulated/0/mtz/config.json";
+    let path = configFilePath;
     if (!files.exists(path)) {
       log("配置文件不存在");
       return;

@@ -286,20 +286,20 @@ const AutojsUtil = {
         ).findOne(3000)
       ) {
         log("发现需要人工接入界面");
-        pushplus.pushFailCapture(
-          "已退出脚本",
-          targetName +
-          " 查找失败!" +
-          "请马上手动验证账号 "         );
+        // pushplus.pushFailCapture(
+          // "已退出脚本",
+          // targetName +
+          // " 查找失败!" +
+          // "请马上手动验证账号 "         );
         log("脚本退出");
         exit();
       } else {
-        pushplus.pushFailCapture(
-          "即将自动重启脚本",
-          targetName +
-          " 查找失败!" +
-          "非预期元素 " 
-        );
+        // pushplus.pushFailCapture(
+        //   "即将自动重启脚本",
+        //   targetName +
+        //   " 查找失败!" +
+        //   "非预期元素 " 
+        // );
       }
 
       log("等待1分钟，再重启。等待工作人员前来查看日志");
