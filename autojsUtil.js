@@ -1,6 +1,5 @@
 const { pushplus } = require("./msgPush");
 const { Robot } = require("./robot");
-const { Smms } = require("./smms");
 
 const AutojsUtil = {
   randomSleep: function (maxSecend, minSecend) {
@@ -280,7 +279,6 @@ const AutojsUtil = {
       // 截图，保存，并发送。todo
       log("进行截图");
       let path = this.captureAndSaveScreen();
-      let picUrl = Smms.uploadPic(path);
 
       if (
         textMatches(
@@ -292,9 +290,7 @@ const AutojsUtil = {
           "已退出脚本",
           targetName +
           " 查找失败!" +
-          "请马上手动验证账号 " +
-          picUrl
-        );
+          "请马上手动验证账号 "         );
         log("脚本退出");
         exit();
       } else {
@@ -302,8 +298,7 @@ const AutojsUtil = {
           "即将自动重启脚本",
           targetName +
           " 查找失败!" +
-          "非预期元素 " +
-          picUrl
+          "非预期元素 " 
         );
       }
 
