@@ -1,6 +1,6 @@
 const pushplus = {
   push: function (title, content, token, webhookId) {
-    log("推送内容 %s %s", title, content)
+    log("推送内容 %s %s", title, content);
     if (token) {
       let r = http.postJson("https://www.pushplus.plus/send", {
         //   token: "aa2534a208ad4782a0888d03139b846b",
@@ -12,7 +12,7 @@ const pushplus = {
         webhook: webhookId,
       });
       if (r && r.statusCode == 200) {
-          log(r.body.json());
+        log(r.body.json());
         log("推送成功");
       } else {
         console.warn("推送失败");
@@ -25,12 +25,11 @@ const pushplus = {
     // https://pushplus.apifox.cn/api-107787114
     // https://www.pushplus.plus/send
 
-    log("推送内容 %s %s", title, content)
+    log("推送内容 %s %s", title, content);
     let s = storages.create("msgpush-autojsxxxxxxx");
     let token = s.get("pushToken");
-    let webhookId = s.get("webhookID");
+    let webhookId = s.get("webhookId");
     this.push(title, content, token, webhookId);
-
   },
   // 截图转化为base64太大了。先放弃了
   // pushFailCapture: function (title, content, picUrl) {

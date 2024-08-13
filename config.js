@@ -1,4 +1,4 @@
-const configFilePath="/storage/emulated/0/JFAlert/config.json"
+const configFilePath = "/storage/emulated/0/JFAlert/config.json";
 
 const Config = {
   deviceId: "",

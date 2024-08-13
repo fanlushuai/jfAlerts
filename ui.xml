@@ -34,7 +34,7 @@
 		</horizontal>
 		<text text="轮训周期(秒)" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
 		<horizontal marginTop="1" gravity="center">
-			<input text="5"  maxLength="1000" id="stepSizeSec" w="*" gravitry="center" />
+			<input text="5" inputType="number" maxLength="1000" id="stepSizeSec" w="*" gravitry="center" />
 		</horizontal>
 		<vertical>
 			<horizontal marginTop="1" gravity="center">

@@ -9,8 +9,8 @@ for (ele of eles) {
 }
 
 function logEx(ele) {
-  //   let l = "className:" + ele.className();
-  let l = "cN:" + ele.className().replace("android", "").replace("widget", "");
+  let l = "className:" + ele.className();
+  // let l = "cN:" + ele.className().replace("android", "").replace("widget", "");
 
   if (ele.id()) {
     l += " - id: " + ele.id().split("/")[1];
