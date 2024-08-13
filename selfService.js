@@ -59,11 +59,8 @@ const SelfService = {
     log("开始抓取内容");
     let vs = className("android.view.View").find();
 
-    let msg = "设备ID：" + Config.deviceId + "\r\n";
+    let msg = "";
     let i = 0;
-
-    let hasSetLastestTime = false;
-    let hasNew = false;
 
     for (v of vs) {
       if (
@@ -78,44 +75,74 @@ const SelfService = {
       ) {
         continue;
       }
-      log(v.getText());
+      //   log(v.getText());
 
       if (i == 0) {
-        msg += "\r";
-      }
-      if (i == 0) {
-        if (!hasSetLastestTime) {
-          if (s.get("lastxyChnageTimeStr") != v.getText()) {
-            s.put("lastxyChnageTimeStr", v.getText());
-            hasNew = true;
-          }
-          hasSetLastestTime = true;
-        }
-
-        msg += v.getText() + " 变化 ";
+        msg += v.getText() + "#";
       }
       if (i == 1) {
-        msg += v.getText() + " 分 " + "\r";
+        msg += v.getText() + "#";
       }
       if (i == 2) {
-        msg += "    总积分：" + v.getText();
+        msg += v.getText() + "#";
       }
       if (i == 3) {
-        msg += " 原因：" + v.getText();
+        msg += v.getText() + "#";
       }
 
       i++;
       if (i == 4) {
+        msg += "---";
         i = 0;
       }
     }
 
-    if (hasNew) {
-      log("发现新增，进行推送");
-      //   log(msg);
-      pushplus.pushX("信誉积分变化", msg);
+    let arr = msg.split("---");
+
+    let targetArr = [];
+    for (a of arr) {
+      if (a.indexOf("扣") == -1) {
+        continue;
+      }
+
+      let brr = a.split("#");
+      targetArr.push({
+        time: brr[0],
+        change: brr[1],
+        current: brr[2],
+        reason: brr[3],
+      });
+    }
+
+    let lastTargetArr = s.get("lastTargetArr", []);
+
+    let newmsg = [];
+    for (t of targetArr) {
+      let newOne = true;
+      for (lt of lastTargetArr) {
+        if (t.time == lt.time) {
+          newOne = false;
+        }
+      }
+      if (newOne) {
+        log("发现新记录 %j", t);
+        newmsg.push(t);
+      }
+    }
+
+    s.put("lastTargetArr", targetArr);
+
+    if (newmsg.length > 0) {
+      let finalMsg = "设备ID：" + Config.deviceId + "\r\n";
+      for (m of newmsg) {
+        finalMsg +=
+          m.time + " 当前积分：" + m.current + " 变化: " + m.change + "\r\n";
+        " 原因：" + m.reason + "\r\n";
+      }
+
+      pushplus.pushX("信誉积分变化", finalMsg);
     } else {
-      log("上次最新 %s", s.get("lastxyChnageTimeStr"));
+      log("没有扣分变化");
     }
   },
   intoPropList: function () {
@@ -169,9 +196,6 @@ const SelfService = {
     log("开始抓取内容");
     let vs = className("android.view.View").find();
 
-    let hasSetLastestTime = false;
-    let hasNew = false;
-
     let msg = "";
     let i = 0;
     for (v of vs) {
@@ -188,46 +212,74 @@ const SelfService = {
       ) {
         continue;
       }
-      log(v.getText());
+      //   log(v.getText());
 
       if (i == 0) {
-        msg += "\r";
-      }
-      if (i == 0) {
-        if (!hasSetLastestTime) {
-          if (s.get("lastdjchangeTimeStr") != v.getText()) {
-            s.put("lastdjchangeTimeStr", v.getText());
-            hasNew = true;
-          }
-          hasSetLastestTime = true;
-        }
-
-        msg += v.getText() + "  ";
+        msg += v.getText() + "#";
       }
       if (i == 1) {
-        msg += "物品- " + v.getText() + " ";
+        msg += v.getText() + "#";
       }
       if (i == 2) {
-        msg += v.getText() + " " + "\r";
+        msg += v.getText() + "#";
       }
       if (i == 3) {
-        msg += "    剩余：" + v.getText();
-      }
-      if (i == 4) {
-        msg += " 原因：" + v.getText();
+        msg += v.getText() + "#";
       }
 
       i++;
-      if (i == 5) {
+      if (i == 4) {
+        msg += "---";
         i = 0;
       }
     }
 
-    if (hasNew) {
-      log("存在新增，进行推送");
-      pushplus.pushX("道具流水变化", msg);
+    let arr = msg.split("---");
+
+    let targetArr = [];
+    for (a of arr) {
+      if (a.indexOf("喇叭") == -1) {
+        continue;
+      }
+
+      let brr = a.split("#");
+      targetArr.push({
+        time: brr[0],
+        change: brr[1],
+        current: brr[2],
+        reason: brr[3],
+      });
+    }
+
+    let lastTargetArr = s.get("lastTargetArr2", []);
+
+    let newmsg = [];
+    for (t of targetArr) {
+      let newOne = true;
+      for (lt of lastTargetArr) {
+        if (t.time == lt.time) {
+          newOne = false;
+        }
+      }
+      if (newOne) {
+        log("发现新记录 %j", t);
+        newmsg.push(t);
+      }
+    }
+
+    s.put("lastTargetArr2", targetArr);
+
+    if (newmsg.length > 0) {
+      let finalMsg = "设备ID：" + Config.deviceId + "\r\n";
+      for (m of newmsg) {
+        finalMsg +=
+          m.time + " 当前积分：" + m.current + " 变化: " + m.change + "\r\n";
+        " 原因：" + m.reason + "\r\n";
+      }
+
+      pushplus.pushX("喇叭使用提醒", finalMsg);
     } else {
-      log("上次最新 %s", s.get("lastdjchangeTimeStr"));
+      log("没有喇叭变化");
     }
   },
 };

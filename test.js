@@ -29,3 +29,5 @@ const { WeiXin } = require("./weixin");
 // }
 
 // 添加上去，重试。如果实在找不到的话
+storages.remove("xxxxx");
+SelfService.pushxy();
