@@ -1,9 +1,9 @@
 {
-  "name": "积分助手",
+  "name": "巡视助手",
   "main": "main.js",
   "ignore": ["build"],
   "icon": "icon.png",
-  "packageName": "com.jfAlert",
+  "packageName": "com.jfalert",
   "versionName": "1.0.0",
   "versionCode": 1,
   "launchConfig": {
