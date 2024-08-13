@@ -8,13 +8,14 @@ const WeiXin = {
   },
   wo: function () {
     AutojsUtil.clickSelectorWithAutoRefresh(text("我"), "我", 10, this.name);
-    let ele = AutojsUtil.getEleBySelectorWithAutoRefresh(
-      id("ouv"),
-      "微信号",
-      10,
-      this.name
-    );
-    return ele.getText().replace("微信号：", "");
+    // let ele = AutojsUtil.getEleBySelectorWithAutoRefresh(
+    //   id("ouv"),
+    //   "微信号",
+    //   10,
+    //   this.name
+    // );
+    // return ele.getText().replace("微信号：", "");
+    return "";
   },
   intoStarDir: function () {
     AutojsUtil.clickSelectorWithAutoRefresh(
@@ -170,7 +171,7 @@ const WeiXin = {
     // 找通讯录的方式，不靠谱。在没有登陆界面，依然可以看到
     AutojsUtil.waitFor(id("icon_tv").text("通讯录").visibleToUser(true), 30);
 
-    let ele = text("轻触头像以切换账号").findOne(2000)
+    let ele = text("轻触头像以切换账号").findOne(2000);
     if (ele != null) {
       log("没有登陆成功");
       return false;
@@ -195,16 +196,17 @@ const WeiXin = {
         // return text("发现").findOnce() != null
         // return id("ouv").findOnce() != null
         sleep(800);
-        let ok = !desc("返回").visibleToUser(true).exists() && !text("个人信息与权限").visibleToUser(true).exists()
-        return ok
+        let ok =
+          !desc("返回").visibleToUser(true).exists() &&
+          !text("个人信息与权限").visibleToUser(true).exists();
+        return ok;
         // return !desc("返回").visibleToUser(true).exists() || text("收藏").visibleToUser(true).findOnce() != null;
       },
       10,
       WeiXin.backTab
     );
 
-    sleep(1000)
-
+    sleep(1000);
 
     if (!ok) {
       log("刷新再试试");
@@ -223,7 +225,7 @@ const WeiXin = {
         function () {
           AutojsUtil.refreshUI("微信");
 
-          WeiXin.backTab()
+          WeiXin.backTab();
         }
       );
     }
