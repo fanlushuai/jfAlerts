@@ -7,7 +7,8 @@ const pushplus = {
         token: token,
         title: title,
         content: content,
-        template: "txt",
+        // template: "txt",
+        template: "markdown",
         channel: "webhook",
         webhook: webhookId,
       });

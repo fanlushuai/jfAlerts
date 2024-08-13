@@ -133,11 +133,19 @@ const SelfService = {
     s.put("lastTargetArr", targetArr);
 
     if (newmsg.length > 0) {
-      let finalMsg = "设备ID：" + Config.deviceId + "\r\n";
+      let finalMsg = "## 设备ID：" + Config.deviceId + "\n";
       for (m of newmsg) {
         finalMsg +=
-          m.time + " 当前积分：" + m.current + " 变化: " + m.change + "\r\n";
-        " 原因：" + m.reason + "\r\n";
+          "- " +
+          m.time +
+          " 当前积分：**" +
+          m.current +
+          "** 变化: **" +
+          m.change +
+          "** \n" +
+          "原因：**" +
+          m.reason +
+          "** \n";
       }
 
       pushplus.pushX("信誉积分变化", finalMsg);
@@ -270,11 +278,19 @@ const SelfService = {
     s.put("lastTargetArr2", targetArr);
 
     if (newmsg.length > 0) {
-      let finalMsg = "设备ID：" + Config.deviceId + "\r\n";
+      let finalMsg = "## 设备ID：" + Config.deviceId + "\n";
       for (m of newmsg) {
         finalMsg +=
-          m.time + " 当前积分：" + m.current + " 变化: " + m.change + "\r\n";
-        " 原因：" + m.reason + "\r\n";
+          "- " +
+          m.time +
+          " 当前积分：**" +
+          m.current +
+          "** 变化: **" +
+          m.change +
+          "** \n" +
+          "原因：**" +
+          m.reason +
+          "** \n";
       }
 
       pushplus.pushX("喇叭使用提醒", finalMsg);
