@@ -237,6 +237,8 @@ const SelfService = {
 
       i++;
       if (i == 4) {
+        msg += v.getText();
+
         msg += "---";
         i = 0;
       }
@@ -253,9 +255,10 @@ const SelfService = {
       let brr = a.split("#");
       targetArr.push({
         time: brr[0],
-        change: brr[1],
-        current: brr[2],
-        reason: brr[3],
+        thing: brr[1],
+        change: brr[2],
+        current: brr[3],
+        reason: brr[4],
       });
     }
 
@@ -284,13 +287,14 @@ const SelfService = {
         finalMsg +=
           "- " +
           m.time +
-          " 当前积分：**" +
-          m.current +
-          "** 变化: **" +
+          " **" +
+          m.thing +
+          "** " +
+          (m.reason == "物品使用" ? "使用" : m.reason) +
+          " **" +
           m.change +
-          "** \n" +
-          "原因：**" +
-          m.reason +
+          "** 剩余 **" +
+          m.current +
           "** \n";
       }
 

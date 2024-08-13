@@ -43,25 +43,28 @@ const { WeiXin } = require("./weixin");
 let newmsg = [];
 for (let i = 0; i < 10; i++) {
   newmsg.push({
-    time: "2024-08-12 21:01:25",
-    change: "1",
+    time: "08-12 21:01",
+    thing: "小喇叭",
+    change: "-1",
     current: "" + random(1, 100),
-    reason: "结算通过增加信誉积分",
+    reason: "物品使用",
   });
 }
+
 if (newmsg.length > 0) {
-  let finalMsg = "## 事件：喇叭使用\n ### 设备ID：" + "31" + "\n";
+  let finalMsg = "## 事件：喇叭使用 \n ### 设备ID：" + 111 + "\n";
   for (m of newmsg) {
     finalMsg +=
       "- " +
       m.time +
-      " 当前积分：**" +
-      m.current +
-      "** 变化: **" +
+      " **" +
+      m.thing +
+      "** " +
+      (m.reason == "物品使用" ? "使用" : m.reason) +
+      " **" +
       m.change +
-      "** \n" +
-      "原因：**" +
-      m.reason +
+      "** 剩余 **" +
+      m.current +
       "** \n";
   }
   // 2024-08-12 21:01:25当前积分：95 变化:1原因：结算通过增加信誉积分
