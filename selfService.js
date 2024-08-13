@@ -1,4 +1,5 @@
 const { AutojsUtil } = require("./autojsUtil");
+const { Config } = require("./config");
 const { pushplus } = require("./msgPush");
 
 let s = storages.create("xxxxx");
@@ -58,7 +59,7 @@ const SelfService = {
     log("开始抓取内容");
     let vs = className("android.view.View").find();
 
-    let msg = "";
+    let msg = "设备ID：" + Config.deviceId + "\r\n";
     let i = 0;
 
     let hasSetLastestTime = false;
