@@ -2,10 +2,10 @@
 	<vertical>
 		<horizontal marginTop="0" bg="#18181C" gravity="center">
 			<text textStyle="bold" textColor="#EA5217" textSize="26sp">
-				积
+				巡
 			</text>
 			<text marginRight="5" textStyle="bold" textColor="#08BFF5" textSize="26sp">
-				分
+				视
 			</text>
 			<text textStyle="bold" textColor="#FC03FC" textSize="31sp">
 				助
