@@ -133,7 +133,7 @@ const SelfService = {
     s.put("lastTargetArr", targetArr);
 
     if (newmsg.length > 0) {
-      let finalMsg = "## 设备ID：" + Config.deviceId + "\n";
+      let finalMsg = "## 事件：扣分 \n ### 设备ID：" + Config.deviceId + "\n";
       for (m of newmsg) {
         finalMsg +=
           "- " +
@@ -278,7 +278,8 @@ const SelfService = {
     s.put("lastTargetArr2", targetArr);
 
     if (newmsg.length > 0) {
-      let finalMsg = "## 设备ID：" + Config.deviceId + "\n";
+      let finalMsg =
+        "## 事件：喇叭使用 \n ### 设备ID：" + Config.deviceId + "\n";
       for (m of newmsg) {
         finalMsg +=
           "- " +
