@@ -22,20 +22,20 @@ const Robot = {
   },
 
   start: function () {
-    // WeiXin.boot();
-    // log("开始任务");
-    // // Robot.currentAccount = WeiXin.wo();
+    WeiXin.boot();
+    log("开始任务");
+    // Robot.currentAccount = WeiXin.wo();
 
-    // // log("当前微信账号 %s", Robot.currentAccount);
-    // WeiXin.wo();
-    // log("进入自助服务");
-    // WeiXin.intoStarDir();
-    // // WeiXin.searchByTag("自助服务");
-    // // WeiXin.chooseFirst();
+    // log("当前微信账号 %s", Robot.currentAccount);
+    WeiXin.wo();
+    log("进入自助服务");
+    WeiXin.intoStarDir();
+    // WeiXin.searchByTag("自助服务");
+    // WeiXin.chooseFirst();
 
-    // log("点击自助服务");
-    // AutojsUtil.clickEle(text("自助服务").findOne());
-    // sleep(15 * 1000);
+    log("点击自助服务");
+    AutojsUtil.clickEle(text("自助服务").findOne());
+    sleep(15 * 1000);
 
     let lastPushXyTime = 0;
     let lastPushDjTime = 0;
