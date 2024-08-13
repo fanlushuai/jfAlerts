@@ -1,24 +1,28 @@
 const { AutojsUtil } = require("./autojsUtil");
 const { pushplus } = require("./msgPush");
 
-let lastdjchangeTimeStr = "";
-
-let lastxyChnageTimeStr = "";
+let s = storages.create("xxxxx");
 
 const SelfService = {
   intoReputationList: function () {
     log("进入信誉积分");
 
     let timeout = 30 * 1000;
+    let hasFound = false;
     while (1) {
       let time = 0;
+      if (hasFound) {
+        break;
+      }
       while (1) {
         if (text("信誉积分").exists()) {
+          hasFound = true;
           break;
         }
         sleep(800);
-        time += 800;
-        if (timeout < time) {
+        time = time + 800;
+        log(time);
+        if (time > timeout) {
           log("超时刷新");
 
           id("com.tencent.mm:id/coz").findOne().click();
@@ -80,8 +84,8 @@ const SelfService = {
       }
       if (i == 0) {
         if (!hasSetLastestTime) {
-          if (lastxyChnageTimeStr != v.getText()) {
-            lastxyChnageTimeStr = v.getText();
+          if (s.get("lastxyChnageTimeStr") != v.getText()) {
+            s.put("lastxyChnageTimeStr", v.getText());
             hasNew = true;
           }
           hasSetLastestTime = true;
@@ -116,15 +120,21 @@ const SelfService = {
   intoPropList: function () {
     log("进入道具流水");
     let timeout = 30 * 1000;
+    let hasFound = false;
     while (1) {
       let time = 0;
+      if (hasFound) {
+        break;
+      }
       while (1) {
         if (text("道具流水").exists()) {
+          hasFound = true;
           break;
         }
         sleep(800);
-        time += 800;
-        if (timeout < time) {
+        time = time + 800;
+        log(time);
+        if (time > timeout) {
           log("超时刷新");
 
           id("com.tencent.mm:id/coz").findOne().click();
@@ -184,8 +194,8 @@ const SelfService = {
       }
       if (i == 0) {
         if (!hasSetLastestTime) {
-          if (lastdjchangeTimeStr != v.getText()) {
-            lastdjchangeTimeStr = v.getText();
+          if (s.get("lastdjchangeTimeStr") != v.getText()) {
+            s.put("lastdjchangeTimeStr", v.getText());
             hasNew = true;
           }
           hasSetLastestTime = true;
