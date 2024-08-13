@@ -114,7 +114,7 @@ const SelfService = {
       //   log(msg);
       pushplus.pushX("信誉积分变化", msg);
     } else {
-      log("上次最新 %s", lastxyChnageTimeStr);
+      log("上次最新 %s", s.get("lastxyChnageTimeStr"));
     }
   },
   intoPropList: function () {
@@ -226,7 +226,7 @@ const SelfService = {
       log("存在新增，进行推送");
       pushplus.pushX("道具流水变化", msg);
     } else {
-      log("上次最新 %s", lastdjchangeTimeStr);
+      log("上次最新 %s", s.get("lastdjchangeTimeStr"));
     }
   },
 };

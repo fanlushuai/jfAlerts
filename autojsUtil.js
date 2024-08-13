@@ -116,9 +116,6 @@ const AutojsUtil = {
       }
     });
 
-
-
-
     function onClick() {
       let actionText = window.action.text();
 
@@ -126,25 +123,25 @@ const AutojsUtil = {
         // 执行停止操作
         // 停止所有子线程
         // 通过threads.start()启动的所有线程会在脚本被强制停止时自动停止。
-        threads.shutDownAll()
-        AutojsUtil.childStop()
+        threads.shutDownAll();
+        AutojsUtil.childStop();
         // sleep(2000)
 
         // AutojsUtil.stopCurrentScriptEngine(); // 假设有一个更优雅的停止方法
       }
-
     }
 
     // 立即启动
-    log("开启worker 线程")
+    log("开启worker 线程");
 
     threads.start(() => {
       try {
-        taskFunc()
+        taskFunc();
       } catch (error) {
-        log("异常结束")
+        log(error);
+        log("异常结束");
       }
-    })
+    });
   },
   retryGet: function (func, retryLimit) {
     let tryCount = 0;
@@ -156,7 +153,7 @@ const AutojsUtil = {
       tryCount++;
       log("重试 [%s/%s]", tryCount, retryLimit);
       if (tryCount == retryLimit) {
-        log("重试结束，未找到")
+        log("重试结束，未找到");
         // 返回为null
         return result;
       }
@@ -199,8 +196,6 @@ const AutojsUtil = {
     return ele;
   },
 
-
-
   getEleBySelectorWithAutoRefresh: function (
     selector,
     targetName,
@@ -228,18 +223,18 @@ const AutojsUtil = {
 
     // 处理一下登陆的异常。登陆失败卡在我的界面。
     if (targetName == "我" && ele == null) {
-      log("我异常，尝试猜测可能是。 进行登陆异常处理")
+      log("我异常，尝试猜测可能是。 进行登陆异常处理");
       // 判断是否在登陆切换界面。
 
-      let eleTX = text("轻触头像以切换账号").findOne(2000)
+      let eleTX = text("轻触头像以切换账号").findOne(2000);
       if (eleTX != null) {
-        log("异常诊断：卡在登陆界面")
-        log("基于上个账号进行登陆 %s ", Robot.currentAccount)
-        Robot.changeNextAccount(Robot.currentAccount)
+        log("异常诊断：卡在登陆界面");
+        log("基于上个账号进行登陆 %s ", Robot.currentAccount);
+        Robot.changeNextAccount(Robot.currentAccount);
 
-        sleep(3000)
+        sleep(3000);
 
-        log("继续查看我")
+        log("继续查看我");
         let ele = this.retryGet(function () {
           log("查 %s", targetName);
           let e = selector.findOne(findTimeLimitSec * 1000);
@@ -259,15 +254,11 @@ const AutojsUtil = {
         }, 3);
 
         if (ele != null) {
-          log("我 异常处理成功")
+          log("我 异常处理成功");
           return ele;
         }
-
       }
-
     }
-
-
 
     if (!ele) {
       // alert("选择器查找失败");
@@ -287,10 +278,10 @@ const AutojsUtil = {
       ) {
         log("发现需要人工接入界面");
         // pushplus.pushFailCapture(
-          // "已退出脚本",
-          // targetName +
-          // " 查找失败!" +
-          // "请马上手动验证账号 "         );
+        // "已退出脚本",
+        // targetName +
+        // " 查找失败!" +
+        // "请马上手动验证账号 "         );
         log("脚本退出");
         exit();
       } else {
@@ -298,7 +289,7 @@ const AutojsUtil = {
         //   "即将自动重启脚本",
         //   targetName +
         //   " 查找失败!" +
-        //   "非预期元素 " 
+        //   "非预期元素 "
         // );
       }
 
@@ -368,51 +359,52 @@ const AutojsUtil = {
     return {
       点击: (x, y) => shell("input tap " + x + " " + y, false),
 
-      滑动: (x, y, xx, yy, d) => shell("input swipe " + x + " " + y + " " + xx + " " + yy + " " + d, false),
+      滑动: (x, y, xx, yy, d) =>
+        shell(
+          "input swipe " + x + " " + y + " " + xx + " " + yy + " " + d,
+          false
+        ),
 
       输入: (str) => shell("input text " + str, false),
 
-      模拟: (str) => shell("input keyevent " + str, false)
-    }
+      模拟: (str) => shell("input keyevent " + str, false),
+    };
   },
   clickByShell: function (x, y) {
-    let result = this.shell().点击(x, y)
+    let result = this.shell().点击(x, y);
 
     if (result.code != 0) {
-      log("点击失败")
-      log(result)
-      return false
+      log("点击失败");
+      log(result);
+      return false;
     }
 
-    return true
-
+    return true;
   },
   clickEleByShell: function (ele) {
-
     if (ele == null || ele == undefined) {
-      log("无元素，不点击")
-      return
+      log("无元素，不点击");
+      return;
     }
 
-    let b = ele.bounds()
+    let b = ele.bounds();
 
-    let x = random(b.left + 1, b.right - 1)
-    let y = random(b.top + 1, b.bottom - 1)
+    let x = random(b.left + 1, b.right - 1);
+    let y = random(b.top + 1, b.bottom - 1);
 
-    this.clickByShell(x, y)
+    this.clickByShell(x, y);
   },
   clickEle: function (ele) {
-
     if (ele == null || ele == undefined) {
-      log("无元素")
-      return false
+      log("无元素");
+      return false;
     }
 
     // 快速切换，shell点击模式，或者无障碍模式
-    let shellMode = false
+    let shellMode = false;
 
     if (shellMode) {
-      this.clickEleByShell(ele)
+      this.clickEleByShell(ele);
     } else {
       if (ele.clickable()) {
         // log("点元素" + ele);
@@ -620,7 +612,7 @@ const AutojsUtil = {
     );
     w.setTouchable(false);
     w.setSize(-1, -1);
-    setInterval(() => { }, 1000);
+    setInterval(() => {}, 1000);
 
     let paint = new Paint();
     //设置画笔为填充，则绘制出来的图形都是实心的
@@ -730,13 +722,13 @@ const AutojsUtil = {
         /(.{0,3}强.{0,3}|.{0,3}停.{0,3}|.{0,3}结.{0,3}|.{0,3}行.{0,3})/
       ).findOnce();
       if (is_sure) {
-        AutojsUtil.clickEle(is_sure)
+        AutojsUtil.clickEle(is_sure);
         sleep(random(500, 600));
       }
 
       let b = textMatches(/(.*确.*|.*定.*)/).findOnce();
       if (b) {
-        AutojsUtil.clickEle(b)
+        AutojsUtil.clickEle(b);
         sleep(random(500, 600));
         return true;
       }
@@ -765,7 +757,7 @@ const AutojsUtil = {
         //由于系统间同意授权的文本不同，采用正则表达式
         let Allow = textMatches(/(允许|立即开始|统一)/).findOne(10 * 1000);
         if (Allow) {
-          AutojsUtil.clickEle(Allow)
+          AutojsUtil.clickEle(Allow);
         }
       } else {
         log("未发现权限服务调用");
@@ -816,7 +808,7 @@ const AutojsUtil = {
   },
   fatherStop: function () {
     events.broadcast.emit("fatherStop", "主线程要停了");
-  }
+  },
 };
 
 function once(fn, context) {
