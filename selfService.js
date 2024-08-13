@@ -1,17 +1,35 @@
 const { AutojsUtil } = require("./autojsUtil");
 const { pushplus } = require("./msgPush");
 
-const oldData = {};
+let lastdjchangeTimeStr = "";
+
+let lastxyChnageTimeStr = "";
 
 const SelfService = {
   intoReputationList: function () {
     log("进入信誉积分");
+
+    let timeout = 30 * 1000;
     while (1) {
-      if (text("信誉积分").exists()) {
-        break;
+      let time = 0;
+      while (1) {
+        if (text("信誉积分").exists()) {
+          break;
+        }
+        sleep(800);
+        time += 800;
+        if (timeout < time) {
+          log("超时刷新");
+
+          id("com.tencent.mm:id/coz").findOne().click();
+          sleep(1.5 * 1000);
+          id("com.tencent.mm:id/h5n").findOne().click();
+          sleep(1.5 * 1000);
+          break;
+        }
       }
-      sleep(800);
     }
+
     log("找到信誉积分");
 
     let e = text("信誉积分").findOne();
@@ -29,11 +47,19 @@ const SelfService = {
         break;
       }
     }
+
+    text("时间").waitFor();
+    sleep(2 * 1000);
+
     log("开始抓取内容");
     let vs = className("android.view.View").find();
 
     let msg = "";
     let i = 0;
+
+    let hasSetLastestTime = false;
+    let hasNew = false;
+
     for (v of vs) {
       if (
         v.getText() == "时间" ||
@@ -53,6 +79,14 @@ const SelfService = {
         msg += "\r";
       }
       if (i == 0) {
+        if (!hasSetLastestTime) {
+          if (lastxyChnageTimeStr != v.getText()) {
+            lastxyChnageTimeStr = v.getText();
+            hasNew = true;
+          }
+          hasSetLastestTime = true;
+        }
+
         msg += v.getText() + " 变化 ";
       }
       if (i == 1) {
@@ -71,16 +105,35 @@ const SelfService = {
       }
     }
 
-    log(msg);
-    pushplus.pushX("积分变化", msg);
+    if (hasNew) {
+      log("发现新增，进行推送");
+      //   log(msg);
+      pushplus.pushX("信誉积分变化", msg);
+    } else {
+      log("上次最新 %s", lastxyChnageTimeStr);
+    }
   },
   intoPropList: function () {
     log("进入道具流水");
+    let timeout = 30 * 1000;
     while (1) {
-      if (text("道具流水").exists()) {
-        break;
+      let time = 0;
+      while (1) {
+        if (text("道具流水").exists()) {
+          break;
+        }
+        sleep(800);
+        time += 800;
+        if (timeout < time) {
+          log("超时刷新");
+
+          id("com.tencent.mm:id/coz").findOne().click();
+          sleep(1.5 * 1000);
+          id("com.tencent.mm:id/h5n").findOne().click();
+          sleep(1.5 * 1000);
+          break;
+        }
       }
-      sleep(800);
     }
     log("找到道具流水");
 
@@ -99,8 +152,14 @@ const SelfService = {
         break;
       }
     }
+
+    text("时间").waitFor();
+    sleep(2 * 1000);
     log("开始抓取内容");
     let vs = className("android.view.View").find();
+
+    let hasSetLastestTime = false;
+    let hasNew = false;
 
     let msg = "";
     let i = 0;
@@ -124,6 +183,14 @@ const SelfService = {
         msg += "\r";
       }
       if (i == 0) {
+        if (!hasSetLastestTime) {
+          if (lastdjchangeTimeStr != v.getText()) {
+            lastdjchangeTimeStr = v.getText();
+            hasNew = true;
+          }
+          hasSetLastestTime = true;
+        }
+
         msg += v.getText() + "  ";
       }
       if (i == 1) {
@@ -145,8 +212,12 @@ const SelfService = {
       }
     }
 
-    log(msg);
-    pushplus.pushX("积分变化", msg);
+    if (hasNew) {
+      log("存在新增，进行推送");
+      pushplus.pushX("道具流水变化", msg);
+    } else {
+      log("上次最新 %s", lastdjchangeTimeStr);
+    }
   },
 };
 
