@@ -1,3 +1,4 @@
+const { Config } = require("./config");
 const { pushplus } = require("./msgPush");
 const { Robot } = require("./robot");
 
@@ -140,6 +141,28 @@ const AutojsUtil = {
       } catch (error) {
         log(error);
         log("异常结束");
+      }
+    });
+
+    threads.start(() => {
+      try {
+        while (1) {
+          sleep(10 * 1000);
+          let eles = textMatches("请尽快登录微信修改微信密码").findOnce();
+          if (eles.size() > 0) {
+            log("登录失效");
+
+            pushplus.pushX(
+              "微信登录失效",
+              "# 微信登录失效 \n## 设备:" + Config.deviceId
+            );
+
+            break;
+          }
+        }
+      } catch (error) {
+        // log(error);
+        log("登录失效监听结束");
       }
     });
   },

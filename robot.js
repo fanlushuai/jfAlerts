@@ -39,7 +39,19 @@ const Robot = {
 
     let lastPushXyTime = 0;
     let lastPushDjTime = 0;
+
+    let refreshTokenTime = new Date().getTime();
     while (1) {
+      if (new Date().getTime() - refreshTokenTime > 1000 * 120) {
+        log("刷新token");
+        sleep(3 * 1000);
+        back();
+        sleep(3 * 1000);
+        AutojsUtil.clickEle(text("自助服务").findOne());
+        sleep(15 * 1000);
+        refreshTokenTime = new Date().getTime();
+      }
+
       if (
         new Date().getTime() - lastPushXyTime >
         1000 * parseInt(Config.stepSizeSec)
