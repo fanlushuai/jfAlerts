@@ -40,7 +40,26 @@ const SelfService = {
     let e = text("信誉积分").findOne();
     log("点击");
     AutojsUtil.clickEle(e);
-    sleep(1 * 1000);
+    if (this.tryLogin()) {
+      this.intoReputationList();
+    }
+  },
+  tryLogin: function () {
+    // 此正则表达式，内部正则顺序不可改变。会影响匹配的元素。此处，优先匹配mm_alert_cancel_btn元素
+    let loginSure = idMatches(
+      /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
+    ).findOne();
+    if (loginSure) {
+      log("重新登录");
+      AutojsUtil.clickEle(loginSure);
+      sleep(800);
+      AutojsUtil.clickEle(desc("【登录】").findOne());
+      sleep(2 * 1000);
+      AutojsUtil.clickEle(text("微信用户登录").findOne());
+      sleep(5 * 1000);
+      log("登录操作完成");
+      return true;
+    }
   },
   pushxy: function () {
     sleep(1000 * 4);
@@ -186,11 +205,14 @@ const SelfService = {
     let e = text("道具流水").findOne();
     log("点击 道具流水");
     AutojsUtil.clickEle(e);
-    sleep(1 * 1000);
+    if (this.tryLogin()) {
+      this.intoPropList();
+    }
   },
   pushdj: function () {
     sleep(1000 * 4);
     log("等待页面加载");
+
     while (1) {
       if (text("加载中...").exists()) {
         sleep(1000 * 1);

@@ -78,13 +78,30 @@ const { WeiXin } = require("./weixin");
 //   );
 // }
 
-let ele = textStartsWith("你的微信号于").findOnce();
+// let ele = textStartsWith("你的微信号于").findOnce();
 // let ele = text(
 //   "你的微信号于01:01在OPPO-PJC110设备上通过短信登录。如果这不是你的操作，你的短信验证码已经泄漏。请勿转发短信验证码，并排查手机是否被植入木马导致短信被转发。"
 // ).findOne();
 
-log(ele.getText());
+// log(ele.getText());
 
 // fullId("com.tencent.mm:id/ffp")
 // text("确定")
 // fullId("com.tencent.mm:id/ffj")
+// 此正则表达式，内部正则顺序不可改变。会影响匹配的元素。此处，优先匹配mm_alert_cancel_btn元素
+let loginSure = idMatches(
+  /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
+).findOne();
+if (loginSure) {
+  log(loginSure.getText());
+  AutojsUtil.clickEle(loginSure);
+  sleep(800);
+  AutojsUtil.clickEle(desc("【登录】").findOne());
+  sleep(2 * 1000);
+  AutojsUtil.clickEle(text("微信用户登录").findOne());
+  sleep(3 * 1000);
+}
+// if (loginSure) {
+//   log("确定 登录");
+//   AutojsUtil.clickEle(loginSure);
+// }
