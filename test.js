@@ -1,4 +1,4 @@
-const { AutojsUtil } = require("./autojsUtil");
+// const { AutojsUtil } = require("./autojsUtil");
 const { pushplus } = require("./msgPush");
 const { SelfService } = require("./selfService");
 const { WeiXin } = require("./weixin");
@@ -89,19 +89,34 @@ const { WeiXin } = require("./weixin");
 // text("确定")
 // fullId("com.tencent.mm:id/ffj")
 // 此正则表达式，内部正则顺序不可改变。会影响匹配的元素。此处，优先匹配mm_alert_cancel_btn元素
-let loginSure = idMatches(
-  /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
-).findOne();
-if (loginSure) {
-  log(loginSure.getText());
-  AutojsUtil.clickEle(loginSure);
-  sleep(800);
-  AutojsUtil.clickEle(desc("【登录】").findOne());
-  sleep(2 * 1000);
-  AutojsUtil.clickEle(text("微信用户登录").findOne());
-  sleep(3 * 1000);
-}
+// let loginSure = idMatches(
+//   /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
+// ).findOne();
+// if (loginSure) {
+//   log(loginSure.getText());
+//   AutojsUtil.clickEle(loginSure);
+//   sleep(800);
+//   AutojsUtil.clickEle(desc("【登录】").findOne());
+//   sleep(2 * 1000);
+//   AutojsUtil.clickEle(text("微信用户登录").findOne());
+//   sleep(3 * 1000);
+// }
 // if (loginSure) {
 //   log("确定 登录");
 //   AutojsUtil.clickEle(loginSure);
+// }
+
+// log(new Date().getTime());
+// let loginSure = idMatches(/(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/).findOne(
+//   8000
+// );
+// log(new Date().getTime());
+
+SelfService.tryLogin();
+
+// let reloginAlert = text("未登录，请先登录").findOne(8000);
+// if (reloginAlert) {
+//   log("重新登录");
+//   log("点击确定");
+//   AutojsUtil.clickEle(text("确定").findOne());
 // }
