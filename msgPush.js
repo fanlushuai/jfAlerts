@@ -1,3 +1,21 @@
+// 立即执行函数 https://segmentfault.com/a/1190000003902899  .前面加分号。因为前面如果是函数，就是认为，这个是个函数调用。而不是立即执行函数。防止污染变量。
+(function () {
+  let request = http.request;
+  // 覆盖http关键函数request，其他http返回最终会调用这个函数
+  http.request = function () {
+    try {
+      // 捕捉所有异常
+      return request.apply(http, arguments);
+    } catch (e) {
+      // 出现异常返回null
+      console.error("请求异常 %s", e);
+      return null;
+    }
+  };
+  http.__okhttp__.setTimeout(5000);
+  http.__okhttp__.setMaxRetries(3);
+})();
+
 const pushplus = {
   push: function (title, content, token, webhookId) {
     log("推送内容 %s %s", title, content);
