@@ -73,8 +73,7 @@ const SelfService = {
         loadTime += 1000;
         if (loadTime > loadTimeout) {
           log("加载超时30s");
-          log("返回");
-          back();
+
           return;
         }
       } else {
@@ -231,8 +230,6 @@ const SelfService = {
         loadTime += 1000;
         if (loadTime > loadTimeout) {
           log("加载超时30s");
-          log("返回");
-          back();
           return;
         }
       } else {
