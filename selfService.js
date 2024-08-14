@@ -64,9 +64,19 @@ const SelfService = {
   pushxy: function () {
     sleep(1000 * 4);
     log("等待页面加载");
+
+    let loadTimeout = 30 * 1000;
+    let loadTime = 0;
     while (1) {
       if (text("加载中...").exists()) {
         sleep(1000 * 1);
+        loadTime += 1000;
+        if (loadTime > loadTimeout) {
+          log("加载超时30s");
+          log("返回");
+          back();
+          return;
+        }
       } else {
         break;
       }
@@ -213,9 +223,18 @@ const SelfService = {
     sleep(1000 * 4);
     log("等待页面加载");
 
+    let loadTimeout = 30 * 1000;
+    let loadTime = 0;
     while (1) {
       if (text("加载中...").exists()) {
         sleep(1000 * 1);
+        loadTime += 1000;
+        if (loadTime > loadTimeout) {
+          log("加载超时30s");
+          log("返回");
+          back();
+          return;
+        }
       } else {
         break;
       }
