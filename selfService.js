@@ -45,8 +45,6 @@ const SelfService = {
     }
   },
   tryLogin: function () {
-    // 此正则表达式，内部正则顺序不可改变。会影响匹配的元素。此处，优先匹配mm_alert_cancel_btn元素
-
     let reloginAlert = text("未登录，请先登录").findOne(8000);
     if (reloginAlert) {
       log("重新登录");
