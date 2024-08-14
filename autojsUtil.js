@@ -163,7 +163,8 @@ const AutojsUtil = {
             );
 
             //
-            log("主动退出脚本");
+            log("20s后主动退出脚本");
+            sleep(20 * 1000);
             threads.shutDownAll();
             AutojsUtil.childStop();
 
