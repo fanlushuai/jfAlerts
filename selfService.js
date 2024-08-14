@@ -48,7 +48,7 @@ const SelfService = {
     // 此正则表达式，内部正则顺序不可改变。会影响匹配的元素。此处，优先匹配mm_alert_cancel_btn元素
     let loginSure = idMatches(
       /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
-    ).findOne();
+    ).findOne(8000);
     if (loginSure) {
       log("重新登录");
       AutojsUtil.clickEle(loginSure);
