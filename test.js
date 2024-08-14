@@ -1,4 +1,5 @@
 // const { AutojsUtil } = require("./autojsUtil");
+const { AutojsUtil } = require("./autojsUtil");
 const { pushplus } = require("./msgPush");
 const { SelfService } = require("./selfService");
 const { WeiXin } = require("./weixin");
@@ -112,7 +113,7 @@ const { WeiXin } = require("./weixin");
 // );
 // log(new Date().getTime());
 
-SelfService.tryLogin();
+// SelfService.tryLogin();
 
 // let reloginAlert = text("未登录，请先登录").findOne(8000);
 // if (reloginAlert) {
@@ -120,3 +121,5 @@ SelfService.tryLogin();
 //   log("点击确定");
 //   AutojsUtil.clickEle(text("确定").findOne());
 // }
+
+AutojsUtil.clickEle(id("ivOwnerAvatar").findOne());
