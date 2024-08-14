@@ -148,14 +148,24 @@ const AutojsUtil = {
       try {
         while (1) {
           sleep(10 * 1000);
-          let eles = textMatches("请尽快登录微信修改微信密码").findOnce();
-          if (eles.size() > 0) {
+
+          let ele = textStartsWith("你的微信号于").findOnce();
+
+          if (ele) {
             log("登录失效");
 
             pushplus.pushX(
               "微信登录失效",
-              "# 微信登录失效 \n## 设备:" + Config.deviceId
+              "# 微信登录失效 \n## 设备:" +
+                Config.deviceId +
+                "\n" +
+                ele.getText()
             );
+
+            //
+            log("主动退出脚本");
+            threads.shutDownAll();
+            AutojsUtil.childStop();
 
             break;
           }
