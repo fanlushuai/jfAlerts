@@ -254,6 +254,12 @@ const SelfService = {
         timeoutTimes = 0;
         break;
       }
+
+      if (text("确定").exists()) {
+        log("发现乱码弹窗");
+        AutojsUtil.clickEle(text("确定").findOne());
+        sleep(1000 * 2);
+      }
     }
 
     text("时间").waitFor();
