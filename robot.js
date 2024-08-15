@@ -29,6 +29,7 @@ const Robot = {
     // log("当前微信账号 %s", Robot.currentAccount);
     WeiXin.wo();
     log("进入自助服务");
+    sleep(2 * 1000);
     WeiXin.intoStarDir();
     sleep(3 * 1000);
 
