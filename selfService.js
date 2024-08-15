@@ -3,6 +3,8 @@ const { Config } = require("./config");
 const { pushplus } = require("./msgPush");
 
 let s = storages.create("xxxxx");
+let timeoutTimes = 0;
+let timeoutTimesLimit = 4;
 
 const SelfService = {
   intoReputationList: function () {
@@ -73,10 +75,18 @@ const SelfService = {
         loadTime += 1000;
         if (loadTime > loadTimeout) {
           log("加载超时30s");
-
+          timeoutTimes++;
+          if (timeoutTimes >= timeoutTimesLimit) {
+            timeoutTimes = -7; //第一次提醒之后，多次之后再提醒。10次以后。
+            pushplus.pushX(
+              "授权已掉" + Config.deviceId,
+              "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
+            );
+          }
           return;
         }
       } else {
+        timeoutTimes = 0;
         break;
       }
     }
@@ -230,9 +240,18 @@ const SelfService = {
         loadTime += 1000;
         if (loadTime > loadTimeout) {
           log("加载超时30s");
+          timeoutTimes++;
+          if (timeoutTimes >= timeoutTimesLimit) {
+            timeoutTimes = -7; //第一次提醒之后，多次之后再提醒。10次以后。
+            pushplus.pushX(
+              "授权已掉" + Config.deviceId,
+              "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
+            );
+          }
           return;
         }
       } else {
+        timeoutTimes = 0;
         break;
       }
     }
