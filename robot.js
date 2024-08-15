@@ -30,9 +30,11 @@ const Robot = {
     WeiXin.wo();
     log("进入自助服务");
     WeiXin.intoStarDir();
+    sleep(3 * 1000);
+
+    text("链接").waitFor();
     // WeiXin.searchByTag("自助服务");
     // WeiXin.chooseFirst();
-
     log("点击自助服务");
     AutojsUtil.clickEle(text("自助服务").findOne());
     sleep(15 * 1000);

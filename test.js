@@ -122,4 +122,6 @@ const { WeiXin } = require("./weixin");
 //   AutojsUtil.clickEle(text("确定").findOne());
 // }
 
-AutojsUtil.clickEle(id("ivOwnerAvatar").findOne());
+// AutojsUtil.clickEle(id("ivOwnerAvatar").findOne());
+
+log(new Date().getTime());
