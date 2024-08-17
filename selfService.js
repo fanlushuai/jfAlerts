@@ -4,7 +4,7 @@ const { pushplus } = require("./msgPush");
 
 let s = storages.create("xxxxx");
 let timeoutTimes = 0;
-let timeoutTimesLimit = 4;
+let timeoutTimesLimit = 2;
 
 const SelfService = {
   intoReputationList: function () {
@@ -66,27 +66,37 @@ const SelfService = {
   reGetAcess: function () {
     log("重新获取access");
     desc("【切换大区】").findOne().click();
-    sleep(1000);
+    sleep(500);
     idMatches("channelContentId").findOne().click();
-    sleep(1000);
+    sleep(500);
     className("CheckedTextView").text("微信-安卓(android)").findOne().click();
-    sleep(1000);
+    sleep(500);
     idMatches("areaContentId").findOne().click();
-    sleep(1000);
+    sleep(500);
     className("CheckedTextView").text("微信2区-国士无双").findOne().click();
-    let loginSure = idMatches(
-      /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
-    ).findOne();
-    AutojsUtil.clickEle(loginSure);
+    // let loginSure = idMatches(
+    //   /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
+    // ).findOne();
+    // AutojsUtil.clickEle(loginSure);
+    while (1) {
+      if (idMatches(/(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/).exists()) {
+        sleep(500);
+        text("确定").findOne().click();
+        break;
+      }
+      sleep(500);
+    }
+
     className("android.view.View")
       .clickable()
       .desc("javascript:;")
       .depth("21")
       .findOne()
       .click();
-    sleep(1000);
+    sleep(500);
+    log("登录");
     desc("【登录】").findOne().click();
-    sleep(1000);
+    sleep(500);
     text("微信用户登录").findOne().click();
     sleep(2000);
   },
