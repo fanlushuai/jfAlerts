@@ -1,4 +1,5 @@
-eles = find();
+eles = boundsInside(0, 300, device.width, device.height).find();
+// eles = find();
 
 // log(eles);
 

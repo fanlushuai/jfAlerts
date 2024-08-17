@@ -63,6 +63,33 @@ const SelfService = {
       return true;
     }
   },
+  reGetAcess: function () {
+    log("重新获取access");
+    desc("【切换大区】").findOne().click();
+    sleep(1000);
+    idMatches("channelContentId").findOne().click();
+    sleep(1000);
+    className("CheckedTextView").text("微信-安卓(android)").findOne().click();
+    sleep(1000);
+    idMatches("areaContentId").findOne().click();
+    sleep(1000);
+    className("CheckedTextView").text("微信2区-国士无双").findOne().click();
+    let loginSure = idMatches(
+      /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
+    ).findOne();
+    AutojsUtil.clickEle(loginSure);
+    className("android.view.View")
+      .clickable()
+      .desc("javascript:;")
+      .depth("21")
+      .findOne()
+      .click();
+    sleep(1000);
+    desc("【登录】").findOne().click();
+    sleep(1000);
+    text("微信用户登录").findOne().click();
+    sleep(2000);
+  },
   pushxy: function () {
     sleep(1000 * 4);
     log("等待页面加载");
@@ -82,6 +109,8 @@ const SelfService = {
               "授权已掉" + Config.deviceId,
               "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
             );
+
+            return 9;
           }
           return;
         }
@@ -247,6 +276,7 @@ const SelfService = {
               "授权已掉" + Config.deviceId,
               "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
             );
+            return 9;
           }
           return;
         }

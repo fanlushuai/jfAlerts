@@ -1,8 +1,8 @@
 // const { AutojsUtil } = require("./autojsUtil");
-const { AutojsUtil } = require("./autojsUtil");
-const { pushplus } = require("./msgPush");
-const { SelfService } = require("./selfService");
-const { WeiXin } = require("./weixin");
+// const { AutojsUtil } = require("./autojsUtil");
+// const { pushplus } = require("./msgPush");
+// const { SelfService } = require("./selfService");
+// const { WeiXin } = require("./weixin");
 
 // pushplus.push("TEST","fsdfsdfsdfsdfsdfsdfdfsdfffffffffffffffffffffffffffffffff","aa2534a208ad4782a0888d03139b846b","111")
 // SelfService.pushdj();
@@ -124,4 +124,38 @@ const { WeiXin } = require("./weixin");
 
 // AutojsUtil.clickEle(id("ivOwnerAvatar").findOne());
 
-log(new Date().getTime());
+// log(new Date().getTime());
+
+// className("android.widget.Button");
+
+// if (className("TextView").text("在该服务器上未获取到角色信息！").exists()) {
+//   log("xx");
+//   idMatches("mm_alert_ok_btn").text("确定").findOne().click(); //todo
+// }
+
+function reGetAcess() {
+  desc("【切换大区】").findOne().click();
+  sleep(1000);
+  idMatches("channelContentId").findOne().click();
+  sleep(1000);
+  className("CheckedTextView").text("微信-安卓(android)").findOne().click();
+  sleep(1000);
+  idMatches("areaContentId").findOne().click();
+  sleep(1000);
+  className("CheckedTextView").text("微信2区-国士无双").findOne().click();
+  let loginSure = idMatches(
+    /(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/
+  ).findOne();
+  AutojsUtil.clickEle(loginSure);
+  className("android.view.View")
+    .clickable()
+    .desc("javascript:;")
+    .depth("21")
+    .findOne()
+    .click();
+  sleep(1000);
+  desc("【登录】").findOne().click();
+  sleep(1000);
+  text("微信用户登录").findOne().click();
+  sleep(2000);
+}

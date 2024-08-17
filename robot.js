@@ -60,11 +60,16 @@ const Robot = {
         1000 * parseInt(Config.stepSizeSec)
       ) {
         SelfService.intoReputationList();
-        SelfService.pushxy();
+        let r = SelfService.pushxy();
         lastPushXyTime = new Date().getTime();
         sleep(5 * 1000);
         back();
+
         sleep(5 * 1000);
+        if (r && r == 9) {
+          SelfService.reGetAcess();
+          sleep(2 * 1000);
+        }
       }
 
       if (
@@ -72,11 +77,15 @@ const Robot = {
         1000 * parseInt(Config.stepSizeSec)
       ) {
         SelfService.intoPropList();
-        SelfService.pushdj();
+        let r = SelfService.pushdj();
         lastPushDjTime = new Date().getTime();
         sleep(5 * 1000);
         back();
         sleep(5 * 1000);
+        if (r && r == 9) {
+          SelfService.reGetAcess();
+          sleep(2 * 1000);
+        }
       }
     }
   },

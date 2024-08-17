@@ -55,6 +55,7 @@ def testIgnore(f):
 adb = adbutils.AdbClient(host="127.0.0.1", port=5037)
 for info in adb.list():
     print(info.serial, info.state)
+
     # <serial> <device|offline>
 
 for d in adb.device_list():
