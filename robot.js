@@ -28,6 +28,7 @@ const Robot = {
     // 判断当前处于的位置。
     if (desc("【注销】").findOne(3000)) {
       log("发现处于，自助服务页面");
+      sleep(1500);
     } else {
       // Robot.currentAccount = WeiXin.wo();
       log("重新加载到，自助服务页面");
