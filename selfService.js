@@ -81,7 +81,7 @@ const SelfService = {
     while (1) {
       if (idMatches(/(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/).exists()) {
         log("发现弹窗");
-        sleep(500);
+        sleep(1500);
         AutojsUtil.clickEle(text("确定").findOne());
         break;
       }
