@@ -114,6 +114,7 @@ const SelfService = {
 
     let loadTimeout = 30 * 1000;
     let loadTime = 0;
+    let hasClick = false;
     while (1) {
       if (text("加载中...").exists()) {
         sleep(1000 * 1);
@@ -140,7 +141,24 @@ const SelfService = {
       if (text("确定").exists()) {
         log("发现乱码弹窗");
         AutojsUtil.clickEle(text("确定").findOne());
+        hasClick = true;
+
         sleep(1000 * 2);
+      }
+    }
+
+    let timeoutQ = 0;
+    while (1) {
+      sleep(1000);
+      timeoutQ += 1000;
+      if (text("确定").exists()) {
+        log("发现乱码弹窗");
+        AutojsUtil.clickEle(text("确定").findOne());
+        sleep(1000 * 2);
+      }
+
+      if (timeoutQ >= 4000) {
+        break;
       }
     }
 
@@ -287,6 +305,7 @@ const SelfService = {
 
     let loadTimeout = 30 * 1000;
     let loadTime = 0;
+    let hasClick = false;
     while (1) {
       if (text("加载中...").exists()) {
         sleep(1000 * 1);
@@ -312,7 +331,23 @@ const SelfService = {
       if (text("确定").exists()) {
         log("发现乱码弹窗");
         AutojsUtil.clickEle(text("确定").findOne());
+        hasClick = true;
         sleep(1000 * 2);
+      }
+    }
+
+    let timeoutQ = 0;
+    while (1 && hasClick == false) {
+      sleep(1000);
+      timeoutQ += 1000;
+      if (text("确定").exists()) {
+        log("发现乱码弹窗");
+        AutojsUtil.clickEle(text("确定").findOne());
+        sleep(1000 * 2);
+      }
+
+      if (timeoutQ >= 4000) {
+        break;
       }
     }
 
