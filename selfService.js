@@ -92,13 +92,16 @@ const SelfService = {
       sleep(500);
     }
 
+    console.hide();
+
     className("android.view.View")
       .clickable()
       .desc("javascript:;")
-      .depth("21")
       .findOne()
       .click();
     sleep(500);
+
+    AutojsUtil.configConsole("巡查助手");
     log("登录");
     desc("【登录】").findOne().click();
     sleep(500);
