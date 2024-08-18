@@ -124,10 +124,10 @@ const SelfService = {
           timeoutTimes++;
           if (timeoutTimes >= timeoutTimesLimit) {
             timeoutTimes = -7; //第一次提醒之后，多次之后再提醒。10次以后。
-            pushplus.pushX(
-              "授权已掉" + Config.deviceId,
-              "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
-            );
+            // pushplus.pushX(
+            //   "授权已掉" + Config.deviceId,
+            //   "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
+            // );
 
             return 9;
           }
@@ -315,10 +315,10 @@ const SelfService = {
           timeoutTimes++;
           if (timeoutTimes >= timeoutTimesLimit) {
             timeoutTimes = -7; //第一次提醒之后，多次之后再提醒。10次以后。
-            pushplus.pushX(
-              "授权已掉" + Config.deviceId,
-              "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
-            );
+            // pushplus.pushX(
+            //   "授权已掉" + Config.deviceId,
+            //   "## 多次加载超时30s（授权已掉？）\n ## 设备ID: " + Config.deviceId
+            // );
             return 9;
           }
           return;
