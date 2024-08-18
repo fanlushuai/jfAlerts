@@ -148,7 +148,7 @@ function reGetAcess() {
   // ).findOne();
   // AutojsUtil.clickEle(loginSure);
   while (1) {
-    if (idMatches(/(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/).exists()) {
+    if (idMatches(/(.*mm_alert_cancel_btn|.*mm_alert_ok_btn|.*ffp)/).exists()) {
       sleep(500);
       text("确定").findOne().click();
       break;
