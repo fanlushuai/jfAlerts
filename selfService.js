@@ -80,8 +80,9 @@ const SelfService = {
     // AutojsUtil.clickEle(loginSure);
     while (1) {
       if (idMatches(/(.*mm_alert_cancel_btn|.*mm_alert_ok_btn)/).exists()) {
+        log("发现弹窗");
         sleep(500);
-        text("确定").findOne().click();
+        AutojsUtil.clickEle(text("确定").findOne());
         break;
       }
       sleep(500);
