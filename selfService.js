@@ -42,8 +42,17 @@ const SelfService = {
     let e = text("信誉积分").findOne();
     log("点击");
     AutojsUtil.clickEle(e);
+
     if (this.tryLogin()) {
       this.intoReputationList();
+    } else {
+      log("尝试查看点击是否生效");
+      sleep(2000);
+      e = text("信誉积分").find();
+      if (e && e.size() > 0) {
+        log("点击未跳转，重新点击");
+        this.intoReputationList();
+      }
     }
   },
   tryLogin: function () {
@@ -297,6 +306,14 @@ const SelfService = {
     AutojsUtil.clickEle(e);
     if (this.tryLogin()) {
       this.intoPropList();
+    } else {
+      log("尝试查看点击是否生效");
+      sleep(2000);
+      e = text("道具流水").find();
+      if (e && e.size() > 0) {
+        log("点击未跳转，重新点击");
+        this.intoPropList();
+      }
     }
   },
   pushdj: function () {
