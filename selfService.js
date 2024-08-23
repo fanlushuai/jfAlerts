@@ -219,17 +219,15 @@ const SelfService = {
 
     let targetArr = [];
     for (a of arr) {
-      if (a.indexOf("扣") == -1) {
-        continue;
-      }
-
       let brr = a.split("#");
-      targetArr.push({
-        time: brr[0],
-        change: brr[1],
-        current: brr[2],
-        reason: brr[3],
-      });
+      if (brr[1].indexOf("-") > -1) {
+        targetArr.push({
+          time: brr[0],
+          change: brr[1],
+          current: brr[2],
+          reason: brr[3],
+        });
+      }
     }
 
     let lastTargetArr = s.get("lastTargetArr", []);
