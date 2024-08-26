@@ -36,6 +36,10 @@
 		<horizontal marginTop="1" gravity="center">
 			<input text="5" inputType="number" maxLength="1000" id="stepSizeSec" w="*" gravitry="center" />
 		</horizontal>
+		<text text="重启周期(分钟)" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
+		<horizontal marginTop="1" gravity="center">
+			<input text="30" inputType="number" maxLength="1000" id="rebootWxMinute" w="*" gravitry="center" />
+		</horizontal>
 		<vertical>
 			<horizontal marginTop="1" gravity="center">
 				<button id="save" marginLeft="20" marginRight="20" marginTop="10" bg="#23A9F2" text="保 存" />

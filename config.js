@@ -4,6 +4,7 @@ const Config = {
   deviceId: "",
   pushToken: "",
   stepSizeSec: "",
+  rebootWxMinute: "",
   webhookId: "",
   save: function (json) {
     if (json == null) {
@@ -24,6 +25,7 @@ const Config = {
           jsonContent.pushToken != json.pushToken ||
           jsonContent.webhookId != json.webhookId ||
           jsonContent.deviceId != json.deviceId ||
+          jsonContent.rebootWxMinute != json.rebootWxMinute ||
           jsonContent.stepSizeSec != json.stepSizeSec
         ) {
           log("更新配置");
@@ -62,11 +64,14 @@ const Config = {
 
     let stepSizeSec = lS.get("stepSizeSec", "");
     this.stepSizeSec = stepSizeSec;
+    let rebootWxMinute = lS.get("rebootWxMinute", "");
+    this.rebootWxMinute = rebootWxMinute;
 
     ui.deviceId.setText(deviceId + "");
     ui.pushToken.setText(pushToken + "");
     ui.webhookId.setText(webhookId + "");
     ui.stepSizeSec.setText(stepSizeSec + "");
+    ui.stepSizeSec.setText(rebootWxMinute + "");
   },
   setUI2LSConfig: function () {
     log("配置 UI->本地");
@@ -104,6 +109,14 @@ const Config = {
     log(stepSizeSec);
     lS.put("stepSizeSec", stepSizeSec + "");
 
+    let rebootWxMinute = ui.rebootWxMinute.getText();
+    if (rebootWxMinute == null) {
+      rebootWxMinute = "";
+    }
+    this.rebootWxMinute = rebootWxMinute;
+    log(rebootWxMinute);
+    lS.put("rebootWxMinute", rebootWxMinute + "");
+
     let s = storages.create("msgpush-autojsxxxxxxx");
     s.put("pushToken", pushToken + "");
     s.put("webhookId", webhookId + "");
@@ -128,6 +141,10 @@ const Config = {
     let stepSizeSec = lS.get("stepSizeSec", "");
     this.stepSizeSec = stepSizeSec;
     log("stepSizeSec" + stepSizeSec);
+
+    let rebootWxMinute = lS.get("rebootWxMinute", "");
+    this.rebootWxMinute = rebootWxMinute;
+    log("rebootWxMinute" + rebootWxMinute);
   },
   lsByFile: function () {
     let json = this.read();

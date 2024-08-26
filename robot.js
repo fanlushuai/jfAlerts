@@ -1,27 +1,15 @@
 const { AutojsUtil } = require("./autojsUtil.js");
 const { Config } = require("./config.js");
-const { pushplus } = require("./msgPush.js");
 const { SelfService } = require("./selfService.js");
 const { WeiXin } = require("./weixin");
 
+let beginRuntime = new Date().getTime();
+
 const Robot = {
   currentAccount: "",
-  useWholeService: function () {
-    log("完整服务是否存在");
-    let ele = textMatches(/(使用完整服务|允许)/).findOne(5000);
-    if (ele !== null) {
-      log("存在完整服务");
-      AutojsUtil.clickEle(ele);
-      sleep(5000);
-      if (ele.getText() == "使用完整服务") {
-        log("进一步点击 允许");
-        let ele = text("允许").findOne(5000);
-        AutojsUtil.clickEle(ele);
-      }
-    }
-  },
 
   start: function () {
+    beginRuntime = new Date().getTime();
     WeiXin.boot();
     log("开始任务");
 
@@ -93,6 +81,16 @@ const Robot = {
           SelfService.reGetAcess();
           sleep(2 * 1000);
         }
+      }
+
+      if (
+        new Date().getTime() - beginRuntime >
+        Config.rebootWxMinute * 60 * 1000
+      ) {
+        log("重启服务");
+        AutojsUtil.reloadApp("微信");
+        log("重新进入");
+        this.start();
       }
     }
   },

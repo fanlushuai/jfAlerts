@@ -843,6 +843,83 @@ const AutojsUtil = {
   fatherStop: function () {
     events.broadcast.emit("fatherStop", "主线程要停了");
   },
+
+  reloadApp: function (appName) {
+    console.log("强制重启 %s", appName);
+    while (1) {
+      if (this.killApp(appName)) {
+        break;
+      }
+    }
+
+    app.launchApp(appName);
+    sleep(3000);
+  },
+  killApp: function (name) {
+    let packageName = getPackageName(name) || getAppName(name);
+    if (!packageName) {
+      log("找不到packageName" + packageName);
+      return;
+    }
+
+    // 打开系统级应用设置  https://github.com/kkevsekk1/AutoX/issues/706
+
+    let textName = app.getAppName(packageName);
+    let settingsOpenedFlag = false;
+    // 强化版本，有时候，确实打不开不知道为何。非常偶然，但是确实会
+    while (1) {
+      log("打开 %s 设置", textName);
+
+      app.openAppSetting(packageName);
+      log("等待打开设置");
+      startTime = new Date().getTime();
+      while (new Date().getTime() - startTime < 6000) {
+        sleep(500);
+        if (text(textName).exists()) {
+          settingsOpenedFlag = true;
+          break;
+        }
+      }
+
+      if (settingsOpenedFlag) {
+        break;
+      }
+    }
+
+    log("进行盲点");
+    // 执行盲点流程 （多点几次不过分。都是非阻塞的。）
+    let timeLimit = 3;
+    let times = 0; // 多点几次，应对页面上存在一些其他tips文字，干扰流程。
+    do {
+      times++;
+      if (stop()) {
+        log("%s 次 搞定", times);
+        break;
+      }
+    } while (times < timeLimit);
+
+    sleep(random(800, 1000));
+    back();
+    return true;
+
+    // 盲点
+    function stop() {
+      let is_sure = textMatches(
+        /(.{0,3}强.{0,3}|.{0,3}停.{0,3}|.{0,3}结.{0,3}|.{0,3}行.{0,3})/
+      ).findOnce();
+      if (is_sure) {
+        AutojsUtil.clickEle(is_sure);
+        sleep(random(500, 600));
+      }
+
+      let b = textMatches(/(.*确.*|.*定.*)/).findOnce();
+      if (b) {
+        AutojsUtil.clickEle(b);
+        sleep(random(500, 600));
+        return true;
+      }
+    }
+  },
 };
 
 function once(fn, context) {
