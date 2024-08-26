@@ -1,0 +1,50 @@
+<frame w="*" h="*" bg="#F6FFE3" gravity="center">
+	<vertical>
+		<horizontal marginTop="0" bg="#18181C" gravity="center">
+			<text textStyle="bold" textColor="#EA5217" textSize="26sp">
+				巡
+			</text>
+			<text marginRight="5" textStyle="bold" textColor="#08BFF5" textSize="26sp">
+				视
+			</text>
+			<text textStyle="bold" textColor="#FC03FC" textSize="31sp">
+				助
+			</text>
+			<text textStyle="italic" textColor="#869093" textSize="26sp">
+				手
+			</text>
+		</horizontal>
+	</vertical>
+	<vertical marginLeft="30" marginRight="30" marginTop="50">
+		<Switch id="autoService" marginTop="50" text="无障碍服务" textStyle="bold" textColor="#000000" textSize="16sp" checked="{{auto.service!=null}}" />
+		<Switch id="consoleShow" marginTop="20" text="控制台悬浮窗" textStyle="bold" textColor="#000000" textSize="16sp" checked="true" />
+		<text text="本机ID" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
+		<horizontal marginTop="1" gravity="center">
+			<text text="[" />
+			<input text="" lines="1" maxLength="11" id="deviceId" w="150" gravitry="center" />
+			<text text="]" />
+		</horizontal>
+		<text text="PushPlus-Token" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
+		<horizontal marginTop="1" gravity="center">
+			<input text="" id="pushToken" w="*" gravitry="center" />
+		</horizontal>
+		<text text="webhookId" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
+		<horizontal marginTop="1" gravity="center">
+			<input text="" id="webhookId" w="*" gravitry="center" />
+		</horizontal>
+		<text text="轮训周期(秒)" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
+		<horizontal marginTop="1" gravity="center">
+			<input text="5" inputType="number" maxLength="1000" id="stepSizeSec" w="*" gravitry="center" />
+		</horizontal>
+		<text text="重启周期(分钟)" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
+		<horizontal marginTop="1" gravity="center">
+			<input text="30" inputType="number" maxLength="1000" id="rebootWxMinute" w="*" gravitry="center" />
+		</horizontal>
+		<vertical>
+			<horizontal marginTop="1" gravity="center">
+				<button id="save" marginLeft="20" marginRight="20" marginTop="10" bg="#23A9F2" text="保 存" />
+				<button id="boot" marginLeft="20" marginRight="20" marginTop="10" bg="#23A9F2" text="启 动" />
+			</horizontal>
+		</vertical>
+	</vertical>
+</frame>

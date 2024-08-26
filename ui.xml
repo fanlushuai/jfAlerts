@@ -1,50 +1,66 @@
-<frame w="*" h="*" bg="#F6FFE3" gravity="center">
-	<vertical>
-		<horizontal marginTop="0" bg="#18181C" gravity="center">
-			<text textStyle="bold" textColor="#EA5217" textSize="26sp">
-				巡
-			</text>
-			<text marginRight="5" textStyle="bold" textColor="#08BFF5" textSize="26sp">
-				视
-			</text>
-			<text textStyle="bold" textColor="#FC03FC" textSize="31sp">
-				助
-			</text>
-			<text textStyle="italic" textColor="#869093" textSize="26sp">
-				手
-			</text>
-		</horizontal>
-	</vertical>
-	<vertical marginLeft="30" marginRight="30" marginTop="50">
-		<Switch id="autoService" marginTop="50" text="无障碍服务" textStyle="bold" textColor="#000000" textSize="16sp" checked="{{auto.service!=null}}" />
-		<Switch id="consoleShow" marginTop="20" text="控制台悬浮窗" textStyle="bold" textColor="#000000" textSize="16sp" checked="true" />
-		<text text="本机ID" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
-		<horizontal marginTop="1" gravity="center">
-			<text text="[" />
-			<input text="" lines="1" maxLength="11" id="deviceId" w="150" gravitry="center" />
-			<text text="]" />
-		</horizontal>
-		<text text="PushPlus-Token" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
-		<horizontal marginTop="1" gravity="center">
-			<input text="" id="pushToken" w="*" gravitry="center" />
-		</horizontal>
-		<text text="webhookId" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
-		<horizontal marginTop="1" gravity="center">
-			<input text="" id="webhookId" w="*" gravitry="center" />
-		</horizontal>
-		<text text="轮训周期(秒)" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
-		<horizontal marginTop="1" gravity="center">
-			<input text="5" inputType="number" maxLength="1000" id="stepSizeSec" w="*" gravitry="center" />
-		</horizontal>
-		<text text="重启周期(分钟)" marginTop="10" textStyle="bold" textColor="#000000" textSize="16sp" />
-		<horizontal marginTop="1" gravity="center">
-			<input text="30" inputType="number" maxLength="1000" id="rebootWxMinute" w="*" gravitry="center" />
-		</horizontal>
-		<vertical>
-			<horizontal marginTop="1" gravity="center">
-				<button id="save" marginLeft="20" marginRight="20" marginTop="10" bg="#23A9F2" text="保 存" />
-				<button id="boot" marginLeft="20" marginRight="20" marginTop="10" bg="#23A9F2" text="启 动" />
-			</horizontal>
-		</vertical>
-	</vertical>
-</frame>
+<vertical>
+    <appbar>
+        <toolbar bg="#4EBFDD" layout_height="50" margin="-2" id="toolbar" title="巡视助手" />
+    </appbar>
+    <ScrollView>
+        <vertical marginTop="5">
+            <card w="*" h="auto" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
+                <vertical padding="18 8" h="auto">
+                    <linear>
+                        <Switch marginLeft="0" marginRight="12" marginTop="0" marginBottom="0" layout_weight="1" id="autoService" text="无障碍服务" textSize="15sp" checked="{{auto.service != null}}" />
+                        <Switch margin="12 0" layout_weight="1" id="floatyService" text="悬浮窗权限" textSize="15sp" checked="false" />
+                    </linear>
+                </vertical>
+                <View bg="#4EBFDD" h="*" w="5" />
+            </card>
+
+            <card w="*" h="auto" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
+                <vertical padding="18 8" h="auto">
+                    <linear>
+                        <text text="设备ID" textColor="black" w="auto" textStyle="bold" />
+                        <input id="deviceId" textSize="14sp" color="black" paddingLeft="5" w="*" />
+                    </linear>
+                </vertical>
+                <View bg="#4EBFDD" h="*" w="5" />
+            </card>
+            <card w="*" h="auto" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
+                <vertical padding="18 8" h="auto">
+                    <linear>
+                        <text text="PushPlus-token" textColor="black" w="auto" textStyle="bold" />
+                        <input id="pushToken" w="*" gravitry="center" textSize="14sp" color="black" paddingLeft="5" w="*" />
+                    </linear>
+                    <linear>
+                        <text text="WebhookId" textColor="black" w="auto" textStyle="bold" />
+                        <input id="webhookId" textSize="14sp" color="black" paddingLeft="5" w="*" />
+                    </linear>
+                </vertical>
+                <View bg="#4EBFDD" h="*" w="5" />
+            </card>
+
+            <card w="*" h="auto" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
+                <vertical padding="18 8" h="auto">
+                    <linear>
+                        <text text="最小刷新周期" textSize="14sp" textColor="black" w="auto" textStyle="bold" layout_weight="0.2" />
+                        <input id="stepSizeSec" textSize="14sp" color="black" paddingLeft="5" ems="3" inputType="number" gravity="center" layout_weight="1" />
+                        <text text="（秒）" textSize="14sp" textColor="black" w="auto" textStyle="bold" layout_weight="1.8" />
+                    </linear>
+                    <linear>
+                        <text text="微信重启周期" textSize="14sp" textColor="black" w="auto" textStyle="bold" layout_weight="0.2" />
+                        <input id="rebootWxMinute" textSize="14sp" color="black" paddingLeft="5" ems="3" inputType="number" gravity="center" layout_weight="1" />
+                        <text text="（分）" textSize="14sp" textColor="black" w="auto" textStyle="bold" layout_weight="1.8" />
+                    </linear>
+                </vertical>
+                <View bg="#4EBFDD" h="*" w="5" />
+            </card>
+
+            <card w="*" h="auto" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
+                <button id="save" h="auto" text="保 存 配 置" textSize="17" textStyle="bold" color="#ffffff" bg="#4EBFDD" foreground="?selectableItemBackground" layout_gravity="bottom" />
+                <View bg="#4EBFDD" h="*" w="5" />
+            </card>
+            <card w="*" h="auto" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
+                <button id="boot" h="auto" text="开 始 运 行" textSize="17" textStyle="bold" color="#ffffff" bg="#4EBFDD" foreground="?selectableItemBackground" layout_gravity="bottom" />
+                <View bg="#4EBFDD" h="*" w="5" />
+            </card>
+        </vertical>
+    </ScrollView>
+</vertical>
