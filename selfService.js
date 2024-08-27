@@ -420,6 +420,12 @@ const SelfService = {
       }
 
       let brr = a.split("#");
+
+      // 只处理减去的小喇叭
+      if (brr[2].indexOf("-") == -1) {
+        continue;
+      }
+
       targetArr.push({
         time: brr[0],
         thing: brr[1],
